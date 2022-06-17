@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<!--MVVM中的V-View（模板），这里可以理解为页面-->
+<div id="root">
+    <h1>名字：{{name}}</h1>
+    <h1>年龄：{{age}}</h1>
+    <h1>测试：{{$emit}}</h1>
+<!--    Vue实例中的所有属性其实都可以写在双大括号中，不过大部分都是没有意义的-->
+</div>
+
+<script>
+    Vue.config.productionTip = false
+    //整个Vue实例就是VM-View Model 负责将数据反映在模板上同时监听页面并且修改数据
+    const vm = new Vue({
+        el:"#root",
+        data(){//MVVM中的M-Model 表示数据
+            return {
+                name:'jack',
+                age:18
+            }
+        }
+    })
+    console.log(vm)
+</script>
+</body>
+</html>
