@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <button @click="addsex">点击给学生添加性别</button>
+<h2>学校名称：{{name}}</h2>
+<h2>学校地址：{{address}}</h2>
+<h2>学生姓名：{{student.name}}</h2>
+<h2>学生年龄：{{student.age}}</h2>
+<h2 v-if="student.gender">学生性别：{{student.gender}}</h2>
+
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    //需要为学生添加一个性别属性，
+    //Vue.set()添加属性的对象不能是Vue实例本身，也不能是Vue中的data对象（根数据对象）
+    const vm = new Vue({
+        el:'#root',
+        data: {
+            name:'HIT',
+            address:"哈尔滨",
+            student:{
+                name: 'Tom',
+                age:18,
+            }
+        },
+        methods:{
+            addsex(){
+                //set可以动态的为模板添加数据并且是响应式的（包含get set方法，数据改变页面也会更新）
+                // Vue.set(this.student, 'gender', 'man')
+                this.$set(this.student, 'gender', 'man')
+            }
+        }
+    })
+</script>
+</body>
+</html>

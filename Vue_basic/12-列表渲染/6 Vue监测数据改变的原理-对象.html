@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    //Vue为每个data中的属性都配置了get set 方法并且更加强大
+    //它能够找出数组中的对象，或者对象中的数组。直到不再有对象和数组为止。
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            name:'HIT',
+            address:"哈尔滨",
+            college:{
+                name: {
+                    "工科":'土木',
+                    '文科':'人文',
+                    "理科":'数学'
+                },
+                age:'100years'
+            }
+        }
+    })
+</script>
+</body>
+</html>

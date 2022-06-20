@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let data = {
+        name:'HIT',
+        address:"哈尔滨"
+    }
+
+    const obs = new Observe(data)
+
+    //如果不使用Observe而是直接给data本身添加get set方法就会出现循环调用（进入死循环导致栈溢出）
+    function Observe(obj) {
+        //迭代对象，获得对象的所有key
+        const key = Object.keys(obj)//返回一个数组
+        //遍历key，将所有的key都添加到Observe创建的实例对象上（数据代理）
+        key.forEach((k) => {
+            Object.defineProperty(this, k, {
+                get(){
+                    console.log('有人读取data的数据')
+                    return obj[k]
+                },
+                set(val){
+                  console.log(`${k}属性被改变了`)
+                  obj[k] = val
+                }
+            })
+        })
+    }
+
+    Object.defineProperty(data, name, {
+        get(){
+            console.log('有人读取data的数据')
+            return this.name//返回值读取data的数据，又会去调用get方法，最总陷入死循环
+        },
+        set(val){
+            console.log(`${k}属性被改变了`)
+            this.name = val//改变数据，然后又去调用set方法，也是进入死循环
+        }
+    })
+</script>
+</body>
+</html>
