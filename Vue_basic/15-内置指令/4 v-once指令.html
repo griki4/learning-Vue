@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-once</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+<!--    v-once只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。-->
+<h2 v-once>初始n的值为:{{n}}</h2>
+<h2 @click="n++">当前n的值为:{{n}}</h2>
+
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#root',
+        data:{
+            n:1
+        }
+    })
+</script>
+</body>
+</html>

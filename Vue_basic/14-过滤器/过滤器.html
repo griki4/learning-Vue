@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>时间：{{time | timeFormater}}</h2>
+
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#root',
+        data:{
+            time:1655710489799
+        },
+        //过滤器是一个单独的配置项，可以实现对数据的简单处理
+        //默认将time的值作为参数传递给timeFormater
+        //如果要传递参数，则参数值传递给str
+        filters: {
+             timeFormater(value,str='YYYY年MM月DD日 HH:mm:ss'){
+                    // console.log('@',value)
+                    return dayjs(value).format(str)
+            }
+        }
+    })
+</script>
+</body>
+</html>
