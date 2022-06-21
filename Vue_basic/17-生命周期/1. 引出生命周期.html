@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>引出生命周期</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+<h2 :style="{opacity}">欢迎</h2>
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#root',
+        data:{
+            opacity:1
+        },
+        //mounted会在模板初次被解析完成之后自动调用
+        mounted(){
+            setInterval(() => {
+                this.opacity -= 0.1
+                if (this.opacity <= 0) this.opacity = 1
+            },100)
+        }
+    })
+</script>
+</body>
+</html>

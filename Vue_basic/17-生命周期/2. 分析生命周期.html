@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分析生命周期</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>当前n的值是:{{n}}</h2>
+    <button @click="n++">点击n+1</button>
+</div>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#root',
+        data:{
+            n:1
+        },
+        //初始化事件和声明周期
+        //此时vm中还没不能访问到_data和methods
+        beforeCreate(){
+            console.log('beforeCreate')
+        },
+
+        //进行数据代理和监视
+        //此时vm中可以访问到_data和methods
+        created() {
+            console.log('created')
+        },
+
+        //虚拟DOM已经存在但是没挂载到页面，页面展示未经Vue解析的内容
+        //对DOM的操作会生效，但是最终不会生效
+        beforeMount(){
+            console.log('beforeMount')
+        },
+
+        //挂载，将虚拟DOM转变为真实的DOM并且展示在页面上
+        //页面展示经过Vue解析的内容。对DOM的操作最终会生效但是尽量不要这样做。
+        mounted(){
+            console.log('mounted')
+        },
+
+        //数据更新此时数据更新了但是页面仍旧是原来的页面
+        beforeUpdate() {
+            console.log('beforeUpdate')
+        },
+
+        //页面更新，此时数据和页面都是新的，二者在这个阶段达到同步
+        updated() {
+            console.log('updated')
+        },
+
+        //销毁Vue实例之前的工作
+        //此时Vue中的数据和方法等都还是有效的
+        //本阶段主要执行定时器关闭、自定义事件解绑等操作（也就是Vue将要被销毁之前的工作写在这里）
+        beforeDestroy() {
+            console.log('beforeDestroy')
+        },
+
+        //Vue实例被销毁但是工作成果仍旧保留在页面上
+        //Vue内部的数据和方法也不再能访问了，但是原生的DOM方法还是可以使用的。
+        destroyed() {
+            console.log('destroyed')
+        }
+    })
+</script>
+</body>
+</html>
