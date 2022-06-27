@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sessionStorage</title>
+</head>
+<body>
+<button onclick="saveData()">点击存储数据</button>
+<button onclick="readData()">点击读取数据</button>
+<button onclick="deleteData()">点击删除数据</button>
+<button onclick="clearData()">点击清空数据</button>
+
+<script>
+    /*sessionStorage存储的数据在浏览器关闭的时候就会被删除*/
+
+    let p = {
+        name:'Jack',
+        age:18
+    }
+
+    function saveData(){
+        //以key value的形式添加进本地存储
+        sessionStorage.setItem('name', 'Tom')
+        sessionStorage.setItem('person', JSON.stringify(p))
+    }
+
+    function readData(){
+        //以key value的形式添加进
+        let a = sessionStorage.getItem('name')
+        let b = JSON.parse(sessionStorage.getItem('person'))
+        console.log(a, b)
+    }
+    function deleteData(){
+        //以key value的形式添加进
+        sessionStorage.removeItem('name')
+        // localStorage.removeItem('person')
+    }
+    function clearData(){
+        //以key value的形式添加进
+        sessionStorage.clear()
+    }
+
+</script>
+</body>
+</html>
