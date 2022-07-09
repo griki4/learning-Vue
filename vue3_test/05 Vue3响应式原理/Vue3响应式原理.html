@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let p = {
+        name: 'Jack',
+        age: 18
+    }
+    /*
+        let person = {}
+        //Vue2中实现响应式的方法
+        Object.defineProperty(person, 'name', {
+            get(){
+                return p.name
+            },
+            set(value){
+                p.name = value
+            }
+        })
+        Object.defineProperty(person, 'age', {
+            get(){
+                return p.age
+            },
+            set(value){
+                p.age = value
+            }
+        })
+    */
+
+
+    //Vue3响应式原理
+    let person = new Proxy(p, {
+        //拦截读取属性
+        get(target, propName) {
+            //使用反射函数来实现数据的操作
+            return Reflect.get(target, propName)
+        },
+        //拦截数据的修改和增加新的属性
+        set(target, propName, value) {
+            return Reflect.set(target, propName, value)
+        },
+        deleteProperty(target, propName) {
+            return Reflect.deleteProperty(target, propName)
+        }
+
+    })
+</script>
+</body>
+</html>
